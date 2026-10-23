@@ -517,6 +517,6 @@ export function Gallery() {
   );
 }
 
-// Retain the existing homepage chrome; the approved homepage preview remains separate.
-export function Nav(){ const path=usePathname(); return path === "/" ? <LegacyNav/> : <EditorialNav/>; }
-export function Footer(){ const path=usePathname(); return path === "/" ? <LegacyFooter/> : <EditorialFooter/>; }
+// The approved homepage supplies its own matching header; inner pages share editorial chrome.
+export function Nav(){ const path=usePathname(); return path === "/" ? null : <EditorialNav/>; }
+export function Footer(){ return <EditorialFooter/>; }
