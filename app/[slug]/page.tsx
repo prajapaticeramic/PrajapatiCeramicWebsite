@@ -565,8 +565,7 @@ export default async function Page({
               Google Maps embeds, Google Fonts, Instagram links, WhatsApp, and
               email links connect to external services. These services have
               their own privacy policies and may receive technical information
-              when loaded or opened. We do not automatically send your form
-              submission to WhatsApp or Instagram.
+              when loaded or opened. After saving your request, we send the details you provide to FormSubmit (formsubmit.co) to forward them to prajapaticeramics@gmail.com. FormSubmit processes this information under its own privacy policy. We do not automatically send your form submission to WhatsApp or Instagram.
             </p>
             <h3>Cookies and analytics</h3>
             <p>

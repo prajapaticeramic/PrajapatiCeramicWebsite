@@ -4,6 +4,7 @@ import { ArrowUpRight, Check, RefreshCw } from "lucide-react";
 import { experiences, site } from "../content/site";
 import { Photo, WhatsApp } from "./ui";
 import { nepalNow } from "../lib/validation";
+import { forwardSubmission, type FormSubmission } from "../lib/formsubmit";
 export function Field({
   label,
   name,
@@ -50,7 +51,7 @@ function Consent() {
         <a href="/booking-terms" target="_blank" rel="noopener noreferrer">
           booking terms
         </a>
-        , and may be contacted about this request.
+        , and may be contacted about this request. We use FormSubmit to forward your details to the studio’s email.
       </span>
     </label>
   );
@@ -71,7 +72,9 @@ async function post(data: unknown) {
   });
   const v: any = await r.json();
   if (!r.ok) throw new Error(v.error ?? "Unable to save request.");
-  return v;
+  // Save first. Email forwarding failure must never discard the saved request.
+  const emailForwarding=await forwardSubmission(data as FormSubmission,v.reference);
+  return {...v,emailForwarding};
 }
 function Receipt({ receipt, booking = true }: { receipt: any; booking?: boolean }) {
   const [url, setUrl] = useState("");
@@ -88,6 +91,10 @@ function Receipt({ receipt, booking = true }: { receipt: any; booking?: boolean 
       <p style={{ margin: "20px 0" }}>
         {booking ? <>Your request has been saved. It is <strong>not a confirmed reservation</strong>.</> : <>Your inquiry has been saved. This is <strong>not a confirmed order or quotation</strong>.</>} Keep your private tracking link to see the studio’s response. The studio will contact you to agree on pricing and details.
       </p>
+      {receipt.emailForwarding && <p className={receipt.emailForwarding === "accepted" ? "notice" : "notice error"} role={receipt.emailForwarding === "accepted" ? "status" : "alert"}>
+        {receipt.emailForwarding === "accepted" ? "Your request was also forwarded to the studio’s email service." : receipt.emailForwarding === "activation_required" ? "Your request is saved. The studio’s email service is awaiting activation. Please use WhatsApp if your request is urgent." : "Your request is saved, but email forwarding could not be completed. Keep your tracking link and contact the studio on WhatsApp if your request is urgent."}
+        {receipt.emailForwarding !== "accepted" && <> <a href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent(`Hello! Please check my website request ${receipt.reference}.`)}`} target="_blank" rel="noopener noreferrer">Contact the studio ↗</a></>}
+      </p>}
       <a className="status-link" href={url}>
         View your request status ↗
       </a>
