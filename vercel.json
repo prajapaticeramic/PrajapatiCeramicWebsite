@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "node --version",
+  "buildCommand": "node scripts/build-vercel-gateway.mjs",
+  "outputDirectory": ".vercel-gateway",
+  "rewrites": [
+    {
+      "source": "/:path*",
+      "destination": "https://prajapati-ceramic-studio.satinyriver4.chatgpt.site/:path*"
+    }
+  ]
+}

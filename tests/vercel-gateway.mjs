@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import ts from 'typescript';
+const config=JSON.parse(fs.readFileSync('vercel.json','utf8'));
+assert.equal(config.framework,null,'Vercel must not request a Next.js routes manifest');
+assert.equal(config.buildCommand,'node scripts/build-vercel-gateway.mjs');
+assert.equal(config.outputDirectory,'.vercel-gateway');
+assert.deepEqual(config.rewrites,[{source:'/:path*',destination:'https://prajapati-ceramic-studio.satinyriver4.chatgpt.site/:path*'}]);
+const js=ts.transpileModule(fs.readFileSync('lib/server.ts','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
+const exports={};new Function('require','exports',js)(name=>{assert.equal(name,'cloudflare:workers');return {env:{SITE_URL:'https://prajapati-ceramic-studio.satinyriver4.chatgpt.site'}};},exports);
+const request=origin=>new Request('https://prajapati-ceramic-studio.satinyriver4.chatgpt.site/api/requests',{method:'POST',headers:origin?{origin}:undefined});
+assert(exports.sameOrigin(request('https://prajapaticeramic.vercel.app')));
+assert(exports.sameOrigin(request('https://prajapati-ceramic-studio.satinyriver4.chatgpt.site')));
+for(const origin of [undefined,'https://attacker.example','https://prajapaticeramic.vercel.app.attacker.example','http://prajapaticeramic.vercel.app','null'])assert.equal(exports.sameOrigin(request(origin)),false,origin);
+assert.equal(exports.isAdmin(new Request('https://example.test/api/admin')),false);
+console.log('PASS: correct Vercel deployment output, complete page/API forwarding, exact production-origin allowlist, foreign-origin rejection and anonymous staff denial.');
