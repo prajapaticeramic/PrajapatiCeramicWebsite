@@ -5,7 +5,7 @@ const config=JSON.parse(fs.readFileSync('vercel.json','utf8'));
 assert.equal(config.framework,null,'Vercel must not request a Next.js routes manifest');
 assert.equal(config.buildCommand,'node scripts/build-vercel-gateway.mjs');
 assert.equal(config.outputDirectory,'.vercel-gateway');
-assert.deepEqual(config.rewrites,[{source:'/:path*',destination:'https://prajapati-ceramic-studio.satinyriver4.chatgpt.site/:path*'}]);
+assert.deepEqual(config.routes,[{src:'/(.*)',dest:'https://prajapati-ceramic-studio.satinyriver4.chatgpt.site/$1'}]);
 const js=ts.transpileModule(fs.readFileSync('lib/server.ts','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
 const exports={};new Function('require','exports',js)(name=>{assert.equal(name,'cloudflare:workers');return {env:{SITE_URL:'https://prajapati-ceramic-studio.satinyriver4.chatgpt.site'}};},exports);
 const request=origin=>new Request('https://prajapati-ceramic-studio.satinyriver4.chatgpt.site/api/requests',{method:'POST',headers:origin?{origin}:undefined});
