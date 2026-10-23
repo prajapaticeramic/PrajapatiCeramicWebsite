@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Nav, Footer } from "../components/ui";
+import "./editorial.css";
 import { site } from "../content/site";
 import "./globals.css";
 export const metadata: Metadata = {

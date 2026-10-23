@@ -1,3 +1,4 @@
+import { EditorialPage, editorialMetadata } from "../../components/editorial-pages";
 import { notFound } from "next/navigation";
 import {
   Button,
@@ -140,6 +141,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  if (editorialMetadata[slug]) return editorialMetadata[slug];
   const p = pages[slug];
   if (!p) return {};
   return {
@@ -154,6 +156,7 @@ export default async function Page({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  if (editorialMetadata[slug]) return <EditorialPage slug={slug} />;
   const p = pages[slug];
   if (!p) notFound();
   return (

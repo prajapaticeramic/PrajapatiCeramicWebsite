@@ -1,23 +1,3 @@
 import { BookingForm } from "../../components/forms";
-export const metadata = {
-  title: "Book Your Pottery Experience",
-  description:
-    "Request your pottery experience in Boudha or Thamel, Kathmandu. Select a class, preferred date, and number of participants.",
-  alternates: { canonical: "/booking" },
-};
-export default function Booking() {
-  return (
-    <div className="wrap">
-      <div className="page-intro">
-        <span className="eyebrow">LET’S MAKE A MEMORY</span>
-        <h1>
-          Your hands.
-          <br />
-          <em>Your little moment.</em>
-        </h1>
-        <p>Pick an experience and send a request. We’ll help with the rest.</p>
-      </div>
-      <BookingForm />
-    </div>
-  );
-}
+export const metadata = {title:"Book a Session",description:"Request a pottery session in Boudha or Thamel, Kathmandu. Choose your experience, preferred date and time, and number of participants. The studio confirms your booking personally.",alternates:{canonical:"/booking"}};
+export default function Booking(){return <div className="ed-page ed-booking"><div className="ed-intro"><p className="ed-eyebrow">BOOK A SESSION</p><h1>Your Next Memory<br/><em>Starts Here.</em></h1><p className="ed-intro-copy">Choose your moment. We’ll confirm the details together.</p></div><BookingForm/></div>}

@@ -7,20 +7,20 @@ export const site = {
   facebook: "",
   url: "https://prajapati-ceramic-studio.satinyriver4.chatgpt.site",
   studios: ["Boudha", "Thamel"],
-  // Replace nulls with verified details. All prices are per person in NPR.
+  // Prices are intentionally undisclosed. Keep opening hours null until owner-confirmed.
+  // Optional operatingStatus can record current studio notices without changing layout.
   locations: [
     {
       name: "Boudha",
       address: "P993+5V, Boudha, Kathmandu 44600, Nepal",
-      hours: "Daily, 11:00 AM–6:00 PM. Holiday hours may vary.",
+      hours: null,
       mapUrl:
         "https://www.google.com/maps/search/?api=1&query=Prajapati+Pottery+Studio+Boudha&query_place_id=ChIJBQiEJ1Qb6zkR7Ygj45rD77E",
     },
     {
       name: "Thamel",
       address: "Satghumti Chowk, Thamel, Kathmandu 44600, Nepal",
-      hours:
-        "Check current hours on Google Maps or WhatsApp us before visiting. Holiday hours may vary.",
+      hours: null,
       mapUrl:
         "https://www.google.com/maps/search/?api=1&query=Prajapati+Pottery+Studio+Thamel&query_place_id=ChIJr0EcXtYZ6zkRTXCzuxYiXPY",
     },
@@ -29,6 +29,7 @@ export const site = {
     address: string | null;
     hours: string | null;
     mapUrl: string | null;
+    operatingStatus?: string | null;
   }[],
 };
 export const experiences = [
@@ -64,8 +65,8 @@ export const experiences = [
   },
   {
     id: "private",
-    name: "Make a memory, together",
-    formal: "Private & Group Pottery Sessions",
+    name: "A moment of your own",
+    formal: "Private Pottery Sessions",
     duration: "By arrangement",
     minutes: 120,
     category: "Groups & private",
@@ -75,6 +76,20 @@ export const experiences = [
     learn: "A guided creative session adapted to your group.",
     audience: "Couples, friends, families & celebrations",
     image: "studio-group",
+    price: null,
+  },
+  {
+    id: "group",
+    name: "Better, together",
+    formal: "Group Pottery Experiences",
+    duration: "By arrangement",
+    minutes: 120,
+    category: "Groups & private",
+    tag: "SHARE A MOMENT",
+    description: "Bring your favorite people. Make a memory by hand.",
+    learn: "A guided pottery experience adapted to your group.",
+    audience: "Friends, families & celebrations",
+    image: "studio-celebration",
     price: null,
   },
   {
@@ -95,7 +110,7 @@ export const experiences = [
   {
     id: "monthly",
     name: "Go a little deeper",
-    formal: "Monthly Pottery Course",
+    formal: "Monthly Pottery Classes",
     duration: "Monthly course",
     minutes: 120,
     category: "Courses",
@@ -126,7 +141,7 @@ export const experiences = [
   {
     id: "corporate",
     name: "A different kind of teamwork",
-    formal: "Corporate Team-Building",
+    formal: "Corporate and Team-Building Workshops",
     duration: "By arrangement",
     minutes: 120,
     category: "Groups & private",

@@ -4,6 +4,7 @@ export default function sitemap() {
     "",
     "/about",
     "/experiences",
+    "/ceramics",
     "/custom-ceramics",
     "/glazing-firing",
     "/gallery",

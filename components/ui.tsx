@@ -14,6 +14,8 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { EditorialNav, EditorialFooter } from "./editorial-chrome";
 import { experiences, site, faqs, priceLabel } from "../content/site";
 export { ArrowUpRight, ArrowRight, MapPin, Clock, Check, Instagram };
 export function Pot({ className = "" }: { className?: string }) {
@@ -55,7 +57,7 @@ export function Brand() {
     </a>
   );
 }
-export function Nav() {
+function LegacyNav() {
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -71,11 +73,11 @@ export function Nav() {
             className={open ? "nav open" : "nav"}
           >
             {[
-              ["Our story", "/about"],
+              ["Home", "/"],
               ["Experiences", "/experiences"],
-              ["Custom ceramics", "/custom-ceramics"],
-              ["Gallery", "/gallery"],
-              ["Visit us", "/contact"],
+              ["Ceramics", "/ceramics"],
+              ["Our Story", "/about"],
+              ["Visit Us", "/contact"],
             ].map(([label, url]) => (
               <a key={url} href={url}>
                 {label}
@@ -306,7 +308,7 @@ export function CTA() {
     </section>
   );
 }
-export function Footer() {
+function LegacyFooter() {
   return (
     <>
       <footer>
@@ -514,3 +516,7 @@ export function Gallery() {
     </>
   );
 }
+
+// Retain the existing homepage chrome; the approved homepage preview remains separate.
+export function Nav(){ const path=usePathname(); return path === "/" ? <LegacyNav/> : <EditorialNav/>; }
+export function Footer(){ const path=usePathname(); return path === "/" ? <LegacyFooter/> : <EditorialFooter/>; }

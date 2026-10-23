@@ -73,7 +73,7 @@ async function post(data: unknown) {
   if (!r.ok) throw new Error(v.error ?? "Unable to save request.");
   return v;
 }
-function Receipt({ receipt }: { receipt: any }) {
+function Receipt({ receipt, booking = true }: { receipt: any; booking?: boolean }) {
   const [url, setUrl] = useState("");
   const [copied, setCopied] = useState(false);
   useEffect(() => {
@@ -86,10 +86,7 @@ function Receipt({ receipt }: { receipt: any }) {
       <span className="status-pill">Request received · Pending</span>
       <h2 style={{ marginTop: 20 }}>A little closer to clay.</h2>
       <p style={{ margin: "20px 0" }}>
-        Your request has been saved. It is{" "}
-        <strong>not a confirmed reservation</strong>. Keep your private tracking
-        link to see the studio’s response. The studio will contact you to agree
-        on pricing and details.
+        {booking ? <>Your request has been saved. It is <strong>not a confirmed reservation</strong>.</> : <>Your inquiry has been saved. This is <strong>not a confirmed order or quotation</strong>.</>} Keep your private tracking link to see the studio’s response. The studio will contact you to agree on pricing and details.
       </p>
       <a className="status-link" href={url}>
         View your request status ↗
@@ -161,7 +158,7 @@ export function InquiryForm({
   return (
     <div className="form-shell">
       {receipt ? (
-        <Receipt receipt={receipt} />
+        <Receipt receipt={receipt} booking={false} />
       ) : (
         <>
           <h2>{title}</h2>
@@ -659,7 +656,7 @@ export function BookingForm() {
         )}
       </div>
       <aside className="booking-sidebar">
-        <Photo name={selected.image} alt={selected.formal} />
+        <Photo name="studio-making" alt="Guests creating pottery at Prajapati Ceramic" />
         <span className="eyebrow">YOUR MOMENT AT THE WHEEL</span>
         <h3>{selected.name}</h3>
         <p>{selected.description}</p>

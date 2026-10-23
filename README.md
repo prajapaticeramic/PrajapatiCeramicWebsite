@@ -81,3 +81,12 @@ npm run build
 The HTTP tests require the running local preview and migrated local D1. The booking test also requires the local staff mock allowlist. It creates only clearly labeled local test records, cancels reservations, closes its slot, and resolves its inquiry. It never sends customer messages or touches hosted production records. Use a fresh local DB for repeat runs because the smoke test expects empty availability for its chosen date.
 
 Future scope: transactional email, payment checkout, a full CMS, paginated staff history, multilingual content, product shop, room scheduling, gift vouchers, reminders, and accounts.
+
+
+## Remaining-page refresh (23 October 2026)
+
+The five main inner pages now use the approved homepage preview's ivory, terracotta and editorial serif identity. Homepage source `app/page.tsx` is unchanged; the approved animated homepage remains a separate inline preview. Main routes are `/experiences`, `/ceramics`, `/about`, `/contact`, and `/booking`. Existing auxiliary routes and request APIs remain available. Inner pages share `EditorialNav` and `EditorialFooter`; homepage retains its prior chrome and layout, with the requested six-page navigation destinations.
+
+Original owner-supplied workshop photographs are under `public/images/studio-{friends,workshop,celebration,making,moments,proud-maker}.jpg`. Their use on Visit Us illustrates studio experiences, and does not identify which branch appears in a photo. Existing product reference photography stays visibly labeled until original product images are supplied. Replace `Photo` image names to change it.
+
+`content/site.ts` holds studio addresses, Maps links, optional `operatingStatus`, and owner-confirmed opening hours. Hours are currently null, and visitors are directed to Maps / WhatsApp for current details. Addresses were cross-checked against the current Boudha listing and the Thamel Satghumti listing. No product catalog, prices, inventory or online checkout is invented. Business and personal inquiries use the existing persisted request endpoint and private tracking links.
