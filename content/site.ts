@@ -5,7 +5,7 @@ export const site = {
   whatsapp: "9779869421616",
   instagram: "https://www.instagram.com/prajapaticeramic/",
   facebook: "",
-  url: "https://prajapati-ceramic-studio.satinyriver4.chatgpt.site",
+  url: "https://prajapaticeramic.com.np",
   studios: ["Boudha", "Thamel"],
   // Prices are intentionally undisclosed. Keep opening hours null until owner-confirmed.
   // Optional operatingStatus can record current studio notices without changing layout.

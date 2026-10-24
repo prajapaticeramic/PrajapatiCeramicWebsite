@@ -9,7 +9,7 @@ assert.deepEqual(config.routes,[{src:'/(.*)',dest:'https://prajapati-ceramic-stu
 const js=ts.transpileModule(fs.readFileSync('lib/server.ts','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
 const exports={};new Function('require','exports',js)(name=>{assert.equal(name,'cloudflare:workers');return {env:{SITE_URL:'https://prajapati-ceramic-studio.satinyriver4.chatgpt.site'}};},exports);
 const request=origin=>new Request('https://prajapati-ceramic-studio.satinyriver4.chatgpt.site/api/requests',{method:'POST',headers:origin?{origin}:undefined});
-assert(exports.sameOrigin(request('https://prajapaticeramic.vercel.app')));
+for (const origin of ['https://prajapaticeramic.vercel.app','https://prajapaticeramic.com.np','https://www.prajapaticeramic.com.np']) assert(exports.sameOrigin(request(origin)));
 assert(exports.sameOrigin(request('https://prajapati-ceramic-studio.satinyriver4.chatgpt.site')));
 for(const origin of [undefined,'https://attacker.example','https://prajapaticeramic.vercel.app.attacker.example','http://prajapaticeramic.vercel.app','null'])assert.equal(exports.sameOrigin(request(origin)),false,origin);
 assert.equal(exports.isAdmin(new Request('https://example.test/api/admin')),false);

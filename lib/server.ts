@@ -14,7 +14,7 @@ export const json = (data: unknown, status = 200) =>
   });
 export function sameOrigin(req: Request) {
   const origin = req.headers.get("origin");
-  const allowed = [new URL(req.url).origin, (env as any).SITE_URL, "https://prajapaticeramic.vercel.app"].filter(
+  const allowed = [new URL(req.url).origin, (env as any).SITE_URL, "https://prajapaticeramic.vercel.app", "https://prajapaticeramic.com.np", "https://www.prajapaticeramic.com.np"].filter(
     Boolean,
   );
   return Boolean(origin && allowed.includes(origin));
